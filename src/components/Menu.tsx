@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useTrail, animated } from 'react-spring';
+import type { PageType } from 'components/App';
 
 const Container = styled.div`
   position: relative;
@@ -36,38 +37,44 @@ const Text = styled.div`
 const AnimatedText = animated(Text);
 
 interface IMenu {
-  items: any[];
+  items: { name: string; action?: PageType }[];
+  changePage: (action) => void;
+  open: boolean;
 }
 
 export default function Menu(props: IMenu) {
-  const { items } = props;
+  const { items, changePage, open } = props;
 
   const config = { mass: 5, tension: 2000, friction: 200 };
 
-  const [toggle, setToggle] = useState(true);
   const trail = useTrail(items.length, {
     config,
-    opacity: toggle ? 1 : 0,
-    x: toggle ? 0 : 20,
-    y: toggle ? 20 : 0,
-    height: toggle ? 80 : 0
+    opacity: open ? 1 : 0,
+    x: open ? 0 : 20,
+    y: open ? 20 : 0,
+    height: open ? 80 : 0
     // from: { opacity: 0, x: 20, y: 0, height: 0 }
   });
 
   return (
-    <Container onClick={() => setToggle(!toggle)}>
+    <Container>
       <div>
-        {trail.map(({ x, y, height, ...rest }, index) => (
-          <AnimatedItem
-            key={items[index]}
-            style={{
-              ...rest,
-              transform: y.interpolate((y) => `translate3d(${y}px, 0, 0)`)
-            }}
-          >
-            <AnimatedText style={{ height }}>{items[index]}</AnimatedText>
-          </AnimatedItem>
-        ))}
+        {trail.map(({ x, y, height, ...rest }, index) => {
+          const { name, action } = items[index];
+          return (
+            <AnimatedItem
+              key={name}
+              style={{
+                ...rest,
+                transform: y.interpolate((y) => `translate3d(${y}px, 0, 0)`)
+              }}
+            >
+              <AnimatedText style={{ height }} onClick={() => changePage(action)}>
+                {name}
+              </AnimatedText>
+            </AnimatedItem>
+          );
+        })}
       </div>
     </Container>
   );
