@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTrail, animated } from 'react-spring';
-import type { PageType } from 'components/App';
+import type { IMenu } from 'interfaces/menu';
 
 const Container = styled.div`
   position: relative;
@@ -35,12 +35,6 @@ const Text = styled.div`
 `;
 
 const AnimatedText = animated(Text);
-
-interface IMenu {
-  items: { name: string; action?: PageType }[];
-  changePage: (action) => void;
-  open: boolean;
-}
 
 export default function Menu(props: IMenu) {
   const { items, changePage, open } = props;

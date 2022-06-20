@@ -5,7 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const paths = {
   dev: {
-      components: path.resolve(__dirname, 'src/components')
+      components: path.resolve(__dirname, 'src/components'),
+      interfaces: path.resolve(__dirname, 'src/interfaces')
   },
   public: {
       path: '/',
@@ -28,7 +29,7 @@ module.exports = {
     rules: [
       {
         test: /\.m?(j|t)sx?$/,
-        include: [paths.dev.components],
+        include: [paths.dev.components, paths.dev.interfaces],
         exclude: path.resolve(__dirname, 'node_modules'),
         use: [
           {
