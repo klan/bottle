@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
+import { Drawer } from './Drawer';
 
 const Container = styled.div`
   display: grid;
@@ -33,6 +34,7 @@ export default function Grid(props: IGrid) {
   const config = { mass: 5, tension: 2000, friction: 200 };
 
   const [show, setShow] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const transition = useTransition(items, {
     config,
@@ -43,23 +45,27 @@ export default function Grid(props: IGrid) {
   });
 
   return (
-    <Container>
-      {transition(({ size, opacity, ...rest }, item, state, index) => {
-        if (!item) return;
-        const { name } = items[index];
-        return (
-          <AnimatedItem
-            key={name}
-            style={{
-              ...rest,
-              transform: size.interpolate((size) => `scale(${size})`),
-              opacity: opacity.interpolate({ range: [0, 0.25, 0.5, 0.75, 1], output: [0, 0, 0, 0, 1] })
-            }}
-          >
-            <span>{name}</span>
-          </AnimatedItem>
-        );
-      })}
-    </Container>
+    <>
+      <Container>
+        {transition(({ size, opacity, ...rest }, item, state, index) => {
+          if (!item) return;
+          const { name } = items[index];
+          return (
+            <AnimatedItem
+              key={name}
+              style={{
+                ...rest,
+                transform: size.interpolate((size) => `scale(${size})`),
+                opacity: opacity.interpolate({ range: [0, 0.25, 0.5, 0.75, 1], output: [0, 0, 0, 0, 1] })
+              }}
+              onClick={() => setDrawerOpen(true)}
+            >
+              <span>{name}</span>
+            </AnimatedItem>
+          );
+        })}
+      </Container>
+      <Drawer open={drawerOpen} changeOpen={(state) => setDrawerOpen(state)} />
+    </>
   );
 }

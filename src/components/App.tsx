@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import Menu from 'components/Menu';
 import type { IPages, PageType } from 'interfaces/page';
 
+const Header = styled.header`
+  height: 60px;
+`;
+
+const Main = styled.main`
+  flex: 1;
+`;
+
 const Frontpage = lazy(() => import('components/Frontpage'));
 const Beers = lazy(() => import('components/Beers'));
 
@@ -19,9 +27,9 @@ export default function App() {
 
   return (
     <>
-      <header>
+      <Header>
         <button onClick={() => setMenuOpen(!menuOpen)}>toggle menu</button>
-      </header>
+      </Header>
       <Menu
         items={items}
         changePage={(page) => {
@@ -30,9 +38,9 @@ export default function App() {
         }}
         open={menuOpen}
       />
-      <main>
+      <Main>
         <Suspense fallback={<p>loading...</p>}>{page === 'beers' ? <Beers /> : <Frontpage />}</Suspense>
-      </main>
+      </Main>
       <footer></footer>
     </>
   );
