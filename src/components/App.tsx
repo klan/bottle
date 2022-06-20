@@ -1,10 +1,10 @@
 import React, { useState, lazy, Suspense } from 'react';
 import styled from 'styled-components';
-import Menu from './Menu';
+import Menu from 'components/Menu';
 import type { IPages, PageType } from 'interfaces/page';
 
-const Frontpage = lazy(() => import('./Frontpage'));
-const Beers = lazy(() => import('./Beers'));
+const Frontpage = lazy(() => import('components/Frontpage'));
+const Beers = lazy(() => import('components/Beers'));
 
 export default function App() {
   const items: IPages[] = [

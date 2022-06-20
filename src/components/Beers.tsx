@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Grid from './Grid';
-import { GetBeers } from '../interfaces/endpoints';
+import Grid from 'components/Grid';
+import { GetBeers } from 'interfaces/endpoints';
 
 export default function Beers() {
   const [data, setData] = useState(null);

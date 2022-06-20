@@ -1,4 +1,4 @@
-import { fetchJSON, formatParams } from '../helpers/fetch';
+import { fetchJSON, formatParams } from 'helpers/fetch';
 
 const baseUrl = 'https://api.punkapi.com/v2';
 

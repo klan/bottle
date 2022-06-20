@@ -49,6 +49,11 @@ module.exports = {
     ]
   },
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'src/components'),
+      helpers: path.resolve(__dirname, 'src/helpers'),
+      interfaces: path.resolve(__dirname, 'src/interfaces')
+    },
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
