@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from './Grid';
+import { GetBeers } from '../interfaces/endpoints';
 
 export default function Beers() {
-  const gridItems = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5', 'Item6', 'Item7', 'Item8', 'Item9'];
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const initialData = async () => {
+      try {
+        const response = await GetBeers({ page: 1, per_page: 6 });
+        console.log({ response });
+        setData(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    initialData();
+  }, []);
 
   return (
     <section>
       <p>beers</p>
-      <Grid items={gridItems} />
+      <Grid items={data} />
     </section>
   );
 }

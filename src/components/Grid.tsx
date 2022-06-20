@@ -46,16 +46,17 @@ export default function Grid(props: IGrid) {
     <Container>
       {transition(({ size, opacity, ...rest }, item, state, index) => {
         if (!item) return;
+        const { name } = items[index];
         return (
           <AnimatedItem
-            key={items[index]}
+            key={name}
             style={{
               ...rest,
               transform: size.interpolate((size) => `scale(${size})`),
               opacity: opacity.interpolate({ range: [0, 0.25, 0.5, 0.75, 1], output: [0, 0, 0, 0, 1] })
             }}
           >
-            <span>{items[index]}</span>
+            <span>{name}</span>
           </AnimatedItem>
         );
       })}
