@@ -58,7 +58,7 @@ export default function Menu(props: IMenu) {
 
   return (
     <Container>
-      <div>
+      <nav>
         {trail.map(({ x, y, height, ...rest }, index) => {
           const { name, action } = items[index];
           return (
@@ -75,7 +75,7 @@ export default function Menu(props: IMenu) {
             </AnimatedItem>
           );
         })}
-      </div>
+      </nav>
     </Container>
   );
 }

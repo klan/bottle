@@ -36,7 +36,10 @@ export default function App() {
         }}
         open={menuOpen}
       />
-      <Suspense fallback={<p>loading...</p>}>{page === 'beers' ? <Beers /> : <Frontpage />}</Suspense>
+      <main>
+        <Suspense fallback={<p>loading...</p>}>{page === 'beers' ? <Beers /> : <Frontpage />}</Suspense>
+      </main>
+      <footer></footer>
     </>
   );
 }
