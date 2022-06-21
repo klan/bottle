@@ -13,17 +13,29 @@ const Main = styled.main`
 
 const Frontpage = lazy(() => import('components/Frontpage'));
 const Beers = lazy(() => import('components/Beers'));
+const Submit = lazy(() => import('components/Submit'));
 
 export default function App() {
   const items: IPages[] = [
     { name: 'Frontpage', action: 'frontpage' },
     { name: 'Beers', action: 'beers' },
-    { name: 'Submit', action: undefined },
+    { name: 'Submit', action: 'submit' },
     { name: 'About', action: undefined }
   ];
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [page, setPage] = useState<PageType>('frontpage');
+
+  function getPage(type: PageType) {
+    switch (type) {
+      case 'beers':
+        return <Beers />;
+      case 'submit':
+        return <Submit />;
+      default:
+        return <Frontpage />;
+    }
+  }
 
   return (
     <>
@@ -39,7 +51,7 @@ export default function App() {
         open={menuOpen}
       />
       <Main>
-        <Suspense fallback={<p>loading...</p>}>{page === 'beers' ? <Beers /> : <Frontpage />}</Suspense>
+        <Suspense fallback={<p>loading...</p>}>{getPage(page)}</Suspense>
       </Main>
       <footer></footer>
     </>

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { BeerResponse } from 'interfaces/endpoints';
 
-export type PageType = 'frontpage' | 'beers';
+export type PageType = 'frontpage' | 'beers' | 'submit';
 
 export interface IPages {
   name: string;
