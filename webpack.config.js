@@ -7,7 +7,8 @@ const paths = {
   dev: {
       components: path.resolve(__dirname, 'src/components'),
       helpers: path.resolve(__dirname, 'src/helpers'),
-      interfaces: path.resolve(__dirname, 'src/interfaces')
+      interfaces: path.resolve(__dirname, 'src/interfaces'),
+      tokens: path.resolve(__dirname, 'src/tokens')
   },
   public: {
       path: '/',
@@ -30,7 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.m?(j|t)sx?$/,
-        include: [paths.dev.components, paths.dev.helpers, paths.dev.interfaces],
+        include: [paths.dev.components, paths.dev.helpers, paths.dev.interfaces, paths.dev.tokens],
         exclude: path.resolve(__dirname, 'node_modules'),
         use: [
           {
@@ -50,9 +51,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      components: path.resolve(__dirname, 'src/components'),
-      helpers: path.resolve(__dirname, 'src/helpers'),
-      interfaces: path.resolve(__dirname, 'src/interfaces')
+      ...paths.dev
     },
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.ts', '.tsx']
