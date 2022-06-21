@@ -8,7 +8,8 @@ const paths = {
       components: path.resolve(__dirname, 'src/components'),
       helpers: path.resolve(__dirname, 'src/helpers'),
       interfaces: path.resolve(__dirname, 'src/interfaces'),
-      tokens: path.resolve(__dirname, 'src/tokens')
+      tokens: path.resolve(__dirname, 'src/tokens'),
+      typography: path.resolve(__dirname, 'src/typography')
   },
   public: {
       path: '/',
@@ -31,7 +32,7 @@ module.exports = {
     rules: [
       {
         test: /\.m?(j|t)sx?$/,
-        include: [paths.dev.components, paths.dev.helpers, paths.dev.interfaces, paths.dev.tokens],
+        include: [paths.dev.components, paths.dev.helpers, paths.dev.interfaces, paths.dev.tokens, paths.dev.typography],
         exclude: path.resolve(__dirname, 'node_modules'),
         use: [
           {
