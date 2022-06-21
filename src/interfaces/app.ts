@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { BeerResponse } from 'interfaces/endpoints';
 
 export type PageType = 'frontpage' | 'beers';
@@ -14,10 +15,15 @@ export interface IMenu {
 }
 
 export interface IDrawer {
+  children?: ReactNode;
   open: boolean;
-  changeOpen: (state) => void;
+  close: () => void;
 }
 
 export interface IGrid {
   items: BeerResponse[];
+}
+
+export interface IDetail {
+  item: BeerResponse;
 }

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 import Drawer from 'components/Drawer';
+import Detail from 'components/Detail';
 import type { IGrid } from 'interfaces/app';
+import type { BeerResponse } from 'interfaces/endpoints';
 
 const Container = styled.div`
   display: grid;
@@ -32,6 +34,7 @@ export default function Grid(props: IGrid) {
 
   const [show, setShow] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<BeerResponse>();
 
   const transition = useTransition(items, {
     config,
@@ -40,6 +43,11 @@ export default function Grid(props: IGrid) {
     trail: 100,
     onRest: () => setShow(!show)
   });
+
+  function toggleDetail(state, item) {
+    setDrawerOpen(state);
+    if (item) setSelectedItem(item);
+  }
 
   return (
     <>
@@ -55,15 +63,15 @@ export default function Grid(props: IGrid) {
                 transform: size.interpolate((size) => `scale(${size})`),
                 opacity: opacity.interpolate({ range: [0, 0.25, 0.5, 0.75, 1], output: [0, 0, 0, 0, 1] })
               }}
-              onClick={() => setDrawerOpen(true)}
+              onClick={() => toggleDetail(true, items[index])}
             >
               <span>{name}</span>
             </AnimatedItem>
           );
         })}
       </Container>
-      <Drawer open={drawerOpen} close={() => setDrawerOpen(false)}>
-        <p>hello</p>
+      <Drawer open={drawerOpen} close={() => toggleDetail(false, null)}>
+        <Detail item={selectedItem} />
       </Drawer>
     </>
   );
