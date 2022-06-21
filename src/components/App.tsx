@@ -1,7 +1,7 @@
 import React, { useState, lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import Menu from 'components/Menu';
-import type { IPages, PageType } from 'interfaces/page';
+import type { IPages, PageType } from 'interfaces/app';
 
 const Header = styled.header`
   height: 60px;

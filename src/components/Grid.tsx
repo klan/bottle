@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 import { Drawer } from './Drawer';
+import type { IGrid } from 'interfaces/app';
 
 const Container = styled.div`
   display: grid;
@@ -23,10 +24,6 @@ const Item = styled.div`
 `;
 
 const AnimatedItem = animated(Item);
-
-interface IGrid {
-  items: any[];
-}
 
 export default function Grid(props: IGrid) {
   const { items } = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTransition, useTrail, animated } from 'react-spring';
-import type { IMenu } from 'interfaces/menu';
+import type { IMenu } from 'interfaces/app';
 
 const Backdrop = styled.div`
   position: absolute;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
+import type { IDrawer } from 'interfaces/app';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -50,11 +51,6 @@ const Backdrop = styled.div`
 `;
 
 const AnimatedBackdrop = animated(Backdrop);
-
-interface IDrawer {
-  open: boolean;
-  changeOpen: (state) => void;
-}
 
 export function Drawer(props: IDrawer) {
   const { open, changeOpen } = props;
