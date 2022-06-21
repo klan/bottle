@@ -41,6 +41,10 @@ const Container = styled.div`
 
 const AnimatedContainer = animated(Container);
 
+const ScrollContainer = styled.div`
+  overflow: scroll;
+`;
+
 const Backdrop = styled.div`
   position: absolute;
   top: 0;
@@ -52,14 +56,10 @@ const Backdrop = styled.div`
 
 const AnimatedBackdrop = animated(Backdrop);
 
-export function Drawer(props: IDrawer) {
-  const { open, changeOpen } = props;
+const Drawer: React.FC<IDrawer> = (props) => {
+  const { children, open, close } = props;
 
   const config = { mass: 5, tension: 2000, friction: 200 };
-
-  function close() {
-    changeOpen(false);
-  }
 
   const fade = useTransition(open, {
     config,
@@ -80,12 +80,14 @@ export function Drawer(props: IDrawer) {
         <Wrapper>
           {fade(({ opacity }, item) => item && <AnimatedBackdrop style={{ opacity }} onClick={close} />)}
           <AnimatedContainer style={style}>
-            <div style={{ overflow: 'scroll' }}>
-              <p>hello</p>
-              <div style={{ width: '100%', height: '800px' }} />
+            <div>
+              <button onClick={close}>close</button>
             </div>
+            <ScrollContainer>{children}</ScrollContainer>
           </AnimatedContainer>
         </Wrapper>
       )
   );
-}
+};
+
+export default Drawer;

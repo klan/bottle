@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
-import { Drawer } from './Drawer';
+import Drawer from 'components/Drawer';
 import type { IGrid } from 'interfaces/app';
 
 const Container = styled.div`
@@ -62,7 +62,9 @@ export default function Grid(props: IGrid) {
           );
         })}
       </Container>
-      <Drawer open={drawerOpen} changeOpen={(state) => setDrawerOpen(state)} />
+      <Drawer open={drawerOpen} close={() => setDrawerOpen(false)}>
+        <p>hello</p>
+      </Drawer>
     </>
   );
 }
