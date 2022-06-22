@@ -50,13 +50,14 @@ const Main = styled.main`
 const Frontpage = lazy(() => import('components/Frontpage'));
 const Beers = lazy(() => import('components/Beers'));
 const Submit = lazy(() => import('components/Submit'));
+const About = lazy(() => import('components/About'));
 
 export default function App() {
   const items: IPages[] = [
     { name: 'Frontpage', action: 'frontpage' },
     { name: 'Beers', action: 'beers' },
     { name: 'Submit', action: 'submit' },
-    { name: 'About', action: undefined }
+    { name: 'About', action: 'about' }
   ];
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -68,8 +69,10 @@ export default function App() {
         return <Beers />;
       case 'submit':
         return <Submit />;
+      case 'about':
+        return <About />;
       default:
-        return <Frontpage />;
+        return <Frontpage changePage={(page) => setPage(page)} />;
     }
   }
 

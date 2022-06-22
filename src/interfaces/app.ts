@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { BeerResponse } from 'interfaces/endpoints';
 
-export type PageType = 'frontpage' | 'beers' | 'submit';
+export type PageType = 'frontpage' | 'beers' | 'submit' | 'about';
 
 export interface IPages {
   name: string;
@@ -30,4 +30,8 @@ export interface IDetail {
 
 export interface ICard {
   item: BeerResponse;
+}
+
+export interface IFrontpage {
+  changePage: (action: PageType) => void;
 }
