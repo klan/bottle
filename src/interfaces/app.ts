@@ -10,7 +10,7 @@ export interface IPages {
 
 export interface IMenu {
   items: { name: string; action?: PageType }[];
-  changePage: (action) => void;
+  changePage: (action?: PageType) => void;
   open: boolean;
 }
 

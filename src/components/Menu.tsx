@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { useTransition, useTrail, animated } from 'react-spring';
 import matchMedia from 'helpers/matchMedia';
 import type { IMenu } from 'interfaces/app';
-import { ColorNeutralSurface60, ColorPrimary } from 'tokens';
+import { ColorNeutralSurface60, ColorPrimary, Spacing2, Spacing3 } from 'tokens';
+import CloseIcon from '../icons/close.svg';
 
 const Backdrop = styled.div`
   position: absolute;
@@ -18,17 +19,42 @@ const AnimatedBackdrop = animated(Backdrop);
 const Container = styled.div`
   position: absolute;
   z-index: 2;
+  width: 100%;
+  height: 100%;
+`;
+
+const Navigation = styled.nav`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-top: 60px;
   padding-left: 40px;
   box-sizing: border-box;
 
   @media (min-width: 780px) {
     padding-left: 20%;
   }
+`;
+
+const Header = styled.header`
+  height: 60px;
+`;
+
+const AnimatedHeader = animated(Header);
+
+const MenuButton = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: ${Spacing2};
+  margin: ${Spacing3};
+  cursor: pointer;
+`;
+
+const Icon = styled.img`
+  width: 30px;
+  height: 30px;
 `;
 
 const Item = styled.div<{ height: number }>`
@@ -99,7 +125,12 @@ export default function Menu(props: IMenu) {
             <>
               <AnimatedBackdrop style={{ opacity }} />
               <Container>
-                <nav>
+                <AnimatedHeader style={{ opacity }}>
+                  <MenuButton onClick={() => changePage(null)}>
+                    <Icon src={CloseIcon} alt="close" />
+                  </MenuButton>
+                </AnimatedHeader>
+                <Navigation>
                   {trail.map(({ x, y, height, ...rest }, index) => {
                     const { name, action } = items[index];
                     return (
@@ -117,7 +148,7 @@ export default function Menu(props: IMenu) {
                       </AnimatedItem>
                     );
                   })}
-                </nav>
+                </Navigation>
               </Container>
             </>
           )

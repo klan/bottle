@@ -2,9 +2,45 @@ import React, { useState, lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import Menu from 'components/Menu';
 import type { IPages, PageType } from 'interfaces/app';
+import { Spacing2, Spacing3, Spacing5 } from 'tokens';
+import MenuIcon from '../icons/menu.svg';
+import BottleIcon from '../icons/bottle.svg';
 
 const Header = styled.header`
+  display: flex;
+  align-items: center;
   height: 60px;
+`;
+
+const MenuButton = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: ${Spacing2};
+  margin: ${Spacing3};
+  height: 38px;
+  cursor: pointer;
+`;
+
+const Icon = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
+const Brand = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: ${Spacing5};
+`;
+
+const Logo = styled.img`
+  width: 30px;
+  height: 50px;
+`;
+
+const BrandTitle = styled.div`
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: 'Montserrat', sans-serif;
 `;
 
 const Main = styled.main`
@@ -40,12 +76,18 @@ export default function App() {
   return (
     <>
       <Header>
-        <button onClick={() => setMenuOpen(!menuOpen)}>toggle menu</button>
+        <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
+          <Icon src={MenuIcon} alt="menu" />
+        </MenuButton>
+        <Brand>
+          <Logo src={BottleIcon} alt="bottle" />
+          <BrandTitle>bottle</BrandTitle>
+        </Brand>
       </Header>
       <Menu
         items={items}
         changePage={(page) => {
-          setPage(page);
+          if (page) setPage(page);
           setMenuOpen(false);
         }}
         open={menuOpen}
