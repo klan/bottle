@@ -27,3 +27,7 @@ export interface IGrid {
 export interface IDetail {
   item: BeerResponse;
 }
+
+export interface ICard {
+  item: BeerResponse;
+}

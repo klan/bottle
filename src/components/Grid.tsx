@@ -3,27 +3,25 @@ import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 import Drawer from 'components/Drawer';
 import Detail from 'components/Detail';
+import Card from 'components/Card';
 import type { IGrid } from 'interfaces/app';
 import type { BeerResponse } from 'interfaces/endpoints';
+import { Spacing5, Spacing6 } from 'tokens';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${Spacing5};
+  padding: ${Spacing6};
+
+  background-color: #efecea;
+
+  @media (min-width: 780px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
 `;
 
-const Item = styled.div`
-  line-height: 80px;
-  color: rgb(66, 61, 63);
-  font-size: 2em;
-  font-weight: 800;
-  text-transform: uppercase;
-  text-align: center;
-  background-color: aquamarine;
-  box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
-`;
+const Item = styled.div``;
 
 const AnimatedItem = animated(Item);
 
@@ -65,7 +63,7 @@ export default function Grid(props: IGrid) {
               }}
               onClick={() => toggleDetail(true, items[index])}
             >
-              <span>{name}</span>
+              <Card item={items[index]} />
             </AnimatedItem>
           );
         })}
