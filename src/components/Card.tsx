@@ -52,7 +52,7 @@ const Pill = styled(Typography.Label)`
   color: ${ColorNeutralSurface60};
 `;
 
-const Name = styled(Typography.Heading2)``;
+const Name = styled(Typography.Heading3)``;
 
 const Tagline = styled(Typography.Heading4)``;
 

@@ -13,6 +13,9 @@ const Container = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: ${Spacing5};
   padding: ${Spacing6};
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 
   @media (min-width: 780px) {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

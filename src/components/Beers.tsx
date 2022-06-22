@@ -15,7 +15,7 @@ export default function Beers() {
   useEffect(() => {
     const initialData = async () => {
       try {
-        const response = await GetBeers({ page: 1, per_page: 6 });
+        const response = await GetBeers({ page: 1, per_page: 10 });
         console.log({ response });
         setData(response);
       } catch (error) {
