@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Spacing6 } from 'tokens';
 import * as Typography from 'typography';
 
 const Container = styled.div`
@@ -7,6 +8,7 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: 10%;
+  padding: ${Spacing6};
 `;
 
 const Paragraph = styled(Typography.Body)``;

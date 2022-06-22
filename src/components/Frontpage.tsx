@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import type { IFrontpage } from 'interfaces/app';
 import Button from 'components/Button';
 import * as Typography from 'typography';
+import { Spacing6 } from 'tokens';
 
 const Container = styled.div`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10%;
+  padding: ${Spacing6};
 `;
 
 const MainText = styled(Typography.Heading2)``;
