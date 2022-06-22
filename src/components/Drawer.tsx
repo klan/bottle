@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 import type { IDrawer } from 'interfaces/app';
-import { BorderRadiusMedium, Spacing6 } from 'tokens';
+import { BorderRadiusMedium, Spacing2, Spacing3, Spacing6 } from 'tokens';
+import CloseIcon from '../icons/close.svg';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -40,6 +41,25 @@ const Container = styled.div`
 `;
 
 const AnimatedContainer = animated(Container);
+
+const Header = styled.div`
+  display: flex;
+  justify-content: end;
+`;
+
+const MenuButton = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: ${Spacing2};
+  margin: ${Spacing3};
+  height: 28px;
+  cursor: pointer;
+`;
+
+const Icon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
 
 const ScrollContainer = styled.div`
   overflow-y: auto;
@@ -81,9 +101,11 @@ const Drawer: React.FC<IDrawer> = (props) => {
         <Wrapper>
           {fade(({ opacity }, item) => item && <AnimatedBackdrop style={{ opacity }} onClick={close} />)}
           <AnimatedContainer style={style}>
-            <div>
-              <button onClick={close}>close</button>
-            </div>
+            <Header>
+              <MenuButton onClick={close}>
+                <Icon src={CloseIcon} alt="menu" />
+              </MenuButton>
+            </Header>
             <ScrollContainer>{children}</ScrollContainer>
           </AnimatedContainer>
         </Wrapper>
