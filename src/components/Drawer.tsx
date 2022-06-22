@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 import type { IDrawer } from 'interfaces/app';
+import { BorderRadiusMedium, Spacing6 } from 'tokens';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -18,14 +19,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: auto;
-  padding: 20px;
   box-sizing: border-box;
   width: 100%;
   min-height: 0;
   max-height: calc(100% - 200px);
   background-color: white;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: ${BorderRadiusMedium};
+  border-top-right-radius: ${BorderRadiusMedium};
   overflow: hidden;
 
   @media (min-width: 780px) {
@@ -35,14 +35,15 @@ const Container = styled.div`
     min-height: 200px;
     max-width: calc(100% - 40px);
     max-height: calc(100% - 40px);
-    border-radius: 8px;
+    border-radius: ${BorderRadiusMedium};
   }
 `;
 
 const AnimatedContainer = animated(Container);
 
 const ScrollContainer = styled.div`
-  overflow: scroll;
+  overflow-y: auto;
+  padding: 0 ${Spacing6};
 `;
 
 const Backdrop = styled.div`

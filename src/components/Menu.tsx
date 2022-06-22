@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useTransition, useTrail, animated } from 'react-spring';
+import matchMedia from 'helpers/matchMedia';
 import type { IMenu } from 'interfaces/app';
+import { ColorNeutralSurface60, ColorPrimary } from 'tokens';
 
 const Backdrop = styled.div`
   position: absolute;
@@ -17,20 +19,34 @@ const Container = styled.div`
   position: absolute;
   z-index: 2;
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  padding-top: 60px;
+  padding-left: 40px;
+  box-sizing: border-box;
+
+  @media (min-width: 780px) {
+    padding-left: 20%;
+  }
 `;
 
-const Item = styled.div`
+const Item = styled.div<{ height: number }>`
   width: 100%;
-  height: 80px;
-  line-height: 80px;
-  color: rgb(66, 61, 63);
-  font-size: 5em;
-  font-weight: 800;
+  height: ${({ height }) => `${height}px`};
+  line-height: ${({ height }) => `${height}px`};
+  color: ${ColorNeutralSurface60};
+  font-weight: bold;
+  font-size: 3em;
   text-transform: uppercase;
+
+  &:hover {
+    color: ${ColorPrimary};
+  }
+
+  @media (min-width: 780px) {
+    font-size: 5em;
+  }
 `;
 
 const AnimatedItem = animated(Item);
@@ -48,6 +64,18 @@ export default function Menu(props: IMenu) {
 
   const config = { mass: 5, tension: 2000, friction: 200 };
 
+  const [itemHeight, setItemHeight] = useState<number>(matchMedia.isMobile() ? 60 : 80);
+
+  const handleResize = () => setItemHeight(matchMedia.isMobile() ? 60 : 80); // TODO add debounce
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return (): void => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const fade = useTransition(open, {
     config,
     from: { opacity: 0 },
@@ -60,7 +88,7 @@ export default function Menu(props: IMenu) {
     opacity: open ? 1 : 0,
     x: open ? 0 : 20,
     y: open ? 20 : 0,
-    height: open ? 80 : 0
+    height: open ? itemHeight : 0
   });
 
   return (
@@ -81,6 +109,7 @@ export default function Menu(props: IMenu) {
                           ...rest,
                           transform: y.interpolate((y) => `translate3d(${y}px, 0, 0)`)
                         }}
+                        height={itemHeight}
                       >
                         <AnimatedText style={{ height }} onClick={() => changePage(action)}>
                           {name}
