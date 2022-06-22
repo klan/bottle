@@ -47,7 +47,7 @@ export interface IButton extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<IButton> = (props) => {
-  const { children, size, ...rest } = props;
+  const { children, size = 'lg', ...rest } = props;
   return (
     <StyledButton size={size} {...rest}>
       {children}
