@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { ICard } from 'interfaces/app';
-import { BorderRadiusMedium, BoxShadowMedium, Spacing3 } from 'tokens';
+import {
+  BorderRadiusMedium,
+  BorderRadiusSmall,
+  BoxShadowMedium,
+  ColorNeutralSurface60,
+  ColorPrimarySurface20,
+  Spacing1,
+  Spacing3
+} from 'tokens';
+import Button from 'components/Button';
+import * as Typography from 'typography';
 
 const Container = styled.div`
   display: grid;
@@ -9,14 +19,15 @@ const Container = styled.div`
     'image text'
     'button button';
   grid-template-columns: 80px auto;
-  grid-template-rows: auto 40px;
+  grid-template-rows: auto 32px;
   gap: ${Spacing3};
   box-shadow: ${BoxShadowMedium};
   border-radius: ${BorderRadiusMedium};
   height: 100%;
   min-height: 250px;
-
   background-color: white;
+  padding: ${Spacing3};
+  box-sizing: border-box;
 `;
 
 const ImageContainer = styled.div`
@@ -34,8 +45,23 @@ const Text = styled.div`
   grid-area: text;
 `;
 
+const Pill = styled(Typography.Label)`
+  background-color: ${ColorPrimarySurface20};
+  padding: ${Spacing1} ${Spacing3};
+  border-radius: ${BorderRadiusSmall};
+  color: ${ColorNeutralSurface60};
+`;
+
+const Name = styled(Typography.Heading2)``;
+
+const Tagline = styled(Typography.Heading4)``;
+
 const ButtonContainer = styled.div`
   grid-area: button;
+`;
+
+const CtaButton = styled(Button)`
+  width: 100%;
 `;
 
 export default function Card(props: ICard) {
@@ -44,12 +70,12 @@ export default function Card(props: ICard) {
       name,
       tagline,
       image_url,
-      ingredients: { yeast: yeastName, hops, malt }
+      ingredients: { yeast, hops, malt }
     }
   } = props;
 
-  const hopsName = hops.map(({ name }) => name).join(', ');
-  const maltName = malt.map(({ name }) => name).join(', ');
+  let ingredientsAmount: number = hops.length + malt.length;
+  if (yeast) ingredientsAmount++;
 
   return (
     <Container>
@@ -57,10 +83,13 @@ export default function Card(props: ICard) {
         <Image src={image_url} />
       </ImageContainer>
       <Text>
-        <h2>{name}</h2>
-        <h3>{tagline}</h3>
+        <Pill>{`${ingredientsAmount} ingredients`}</Pill>
+        <Name>{name}</Name>
+        <Tagline>{tagline}</Tagline>
       </Text>
-      <ButtonContainer></ButtonContainer>
+      <ButtonContainer>
+        <CtaButton size="sm">View</CtaButton>
+      </ButtonContainer>
     </Container>
   );
 }

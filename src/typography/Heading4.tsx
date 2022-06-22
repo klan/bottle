@@ -4,7 +4,8 @@ import {
   FontHeading4FamilySansSerif,
   FontHeading4Size,
   FontHeading4WeightRegular,
-  FontHeading4WeightSemiBold
+  FontHeading4WeightSemiBold,
+  Spacing3
 } from 'tokens';
 
 type weights = 'regular' | 'semibold';
@@ -23,6 +24,7 @@ const StyledHeading4 = styled.h4<{ weight: weights }>`
   font-size: ${FontHeading4Size};
   font-weight: ${({ weight }) => headingWeights[weight]};
   font-family: ${FontHeading4FamilySansSerif};
+  margin: ${Spacing3} 0;
 `;
 
 const Heading4: React.FC<IHeading4> = ({ weight = 'semibold', children, ...rest }) => {

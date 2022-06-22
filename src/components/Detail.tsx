@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import type { IDetail } from 'interfaces/app';
 import * as Typography from 'typography';
-import { Spacing3, Spacing9 } from 'tokens';
+import {
+  ColorNeutralSurface60,
+  ColorNeutralSurface80,
+  ColorPrimarySurface20,
+  Spacing3,
+  Spacing6,
+  Spacing9
+} from 'tokens';
 
 const Summary = styled.div`
   display: flex;
@@ -54,7 +61,22 @@ const List = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
+  margin-left: -${Spacing6};
+  margin-right: -${Spacing6};
+  background-color: ${ColorPrimarySurface20};
+  color: ${ColorNeutralSurface60};
 `;
+
+const Item = styled.li`
+  padding: ${Spacing3};
+`;
+
+const IngredientName = styled.div`
+  text-transform: uppercase;
+  color: ${ColorNeutralSurface80};
+`;
+
+const Ingredient = styled(Typography.Label)``;
 
 export default function Detail(props: IDetail) {
   const {
@@ -93,22 +115,22 @@ export default function Detail(props: IDetail) {
         </figure>
         <List>
           {yeastName && (
-            <li>
-              <div>Yeast</div>
-              <span>{yeastName}</span>
-            </li>
+            <Item>
+              <IngredientName>Yeast</IngredientName>
+              <Ingredient>{yeastName}</Ingredient>
+            </Item>
           )}
           {hopsName && (
-            <li>
-              <div>Hops</div>
-              <span>{hopsName}</span>
-            </li>
+            <Item>
+              <IngredientName>Hops</IngredientName>
+              <Ingredient>{hopsName}</Ingredient>
+            </Item>
           )}
           {maltName && (
-            <li>
-              <div>Malt</div>
-              <span>{maltName}</span>
-            </li>
+            <Item>
+              <IngredientName>Malt</IngredientName>
+              <Ingredient>{maltName}</Ingredient>
+            </Item>
           )}
         </List>
       </div>

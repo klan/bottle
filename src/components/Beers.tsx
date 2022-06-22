@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Grid from 'components/Grid';
 import { GetBeers } from 'interfaces/endpoints';
+import { ColorSecondarySurface40 } from 'tokens';
+
+const Section = styled.section`
+  background-color: ${ColorSecondarySurface40};
+  min-height: 100%;
+`;
 
 export default function Beers() {
   const [data, setData] = useState(null);
@@ -19,9 +26,8 @@ export default function Beers() {
   }, []);
 
   return (
-    <section>
-      <p>beers</p>
+    <Section>
       <Grid items={data} />
-    </section>
+    </Section>
   );
 }
